@@ -284,7 +284,7 @@ class NMT(nn.Module):
 
         # 3. Use the torch.split function to iterate over the time dimension of Y.
         for Y_t in torch.split(Y, split_size_or_sections=1, dim=0):
-            Y_t = Y_t.squeeze(Y_t, dim=0)  # shape: (b, e)
+            Y_t = Y_t.squeeze(dim=0)  # shape: (b, e)
             Ybar_t = torch.cat((Y_t, o_prev), dim=1)  # shape: (b, e + h)
             dec_state, o_t, e_t = self.step(Ybar_t, dec_state, enc_hiddens, enc_hiddens_proj, enc_masks)
             combined_outputs.append(o_t)
